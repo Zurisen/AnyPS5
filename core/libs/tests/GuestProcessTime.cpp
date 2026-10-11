@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     constexpr std::uint64_t sleptMicros = 50ULL * 1000;
     const char* scaleText = std::getenv("APS5_TIME_SCALE");
     const double scale = scaleText ? std::strtod(scaleText, nullptr) : 1.0;
-    const auto elapsedMicros = static_cast<std::uint64_t>(static_cast<double>(sleptMicros) * (scale > 0.0 ? scale : 1.0));
+    const auto elapsedMicros = static_cast<std::uint64_t>(static_cast<double>(sleptMicros) * (scale > 0.0 ? scale : 1.0) / 2.0);
     std::this_thread::sleep_for(std::chrono::microseconds(sleptMicros));
     if (argc > 1 && std::strcmp(argv[1], "counter") == 0) {
         const std::uint64_t counter = sceKernelGetProcessTimeCounter();
